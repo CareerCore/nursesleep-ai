@@ -108,8 +108,6 @@ This repository is an educational and exploratory data-science project. It is **
 
 The original code in this repository is released under the MIT License. This does not change the licence or terms governing the external dataset. See `data/README.md` and the dataset source for dataset-specific terms.
 
-Dataset credit: **Mohan Krishna Thalla, Sleep Health & Daily Performance Dataset**.
-
 ## Project status
 
 **Status: Initial reproducible workflow.** Results should be added only after running the notebooks and checking the outputs.
