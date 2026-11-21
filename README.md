@@ -16,15 +16,6 @@ NurseSleep AI is a focused data-science project built around the Sleep Health & 
 
 These are exploratory questions. Group differences are descriptive and do not establish causation.
 
-## Dataset
-
-- **Name:** Sleep Health & Daily Performance Dataset
-- **Source:** [CSV source](https://raw.githubusercontent.com/mohan13krishna/Sleep-Health-Daily-Performance-Dataset/main/sleep_health_dataset.csv)
-- **Credit:** Mohan Krishna Thalla
-- **Use:** Downloaded at runtime by the notebook or helper script; the dataset is not bundled in this repository.
-
-The source has been described as synthetic. Verify the dataset's current licence and attribution terms at its original source before reuse or redistribution. Do not infer that the dataset is a real-world nursing cohort.
-
 ## Quick start
 
 Python 3.10+ is recommended.
