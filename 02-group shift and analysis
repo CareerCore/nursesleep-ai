@@ -1,0 +1,32 @@
+# 02 — Group and shift analysis
+
+This notebook expects an authorised local CSV at `../data/input.csv`. Raw data are excluded from Git. Run cells from top to bottom.
+from pathlib import Path
+import pandas as pd
+
+DATA_PATH = Path("../data/input.csv")
+if not DATA_PATH.exists():
+    raise FileNotFoundError("Add your authorised CSV as data/input.csv before running this notebook.")
+df = pd.read_csv(DATA_PATH)
+display(df.head())
+from pathlib import Path
+OUT = Path("../results/tables")
+OUT.mkdir(parents=True, exist_ok=True)
+
+occupation_col = next((c for c in df.columns if c.lower() in {"occupation", "job", "profession"}), None)
+shift_col = next((c for c in df.columns if c.lower() in {"shift_work", "shiftwork", "shift"}), None)
+numeric_cols = df.select_dtypes(include="number").columns.tolist()
+
+if occupation_col and numeric_cols:
+    summary = df.groupby(occupation_col)[numeric_cols].mean(numeric_only=True)
+    display(summary.head(20))
+    summary.to_csv(OUT / "occupation_numeric_means.csv")
+else:
+    print("Occupation comparison skipped: no occupation-like field or numeric fields found.")
+
+if shift_col and numeric_cols:
+    summary = df.groupby(shift_col)[numeric_cols].mean(numeric_only=True)
+    display(summary)
+    summary.to_csv(OUT / "shift_work_numeric_means.csv")
+else:
+    print("Shift-work comparison skipped: no shift-work-like field or numeric fields found.")
