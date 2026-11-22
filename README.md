@@ -2,113 +2,94 @@
 
 **Reproducible analysis of sleep, shift-work patterns, and cognitive-performance indicators, with an exploratory nursing subgroup analysis.**
 
-NurseSleep AI is a focused data-science project built around the Sleep Health & Daily Performance Dataset. It provides a reproducible workflow for data validation, exploratory analysis, occupational comparisons, baseline predictive modelling, and model interpretation.
+NurseSleep AI is a data-science project focused on data validation, exploratory analysis, occupational comparisons, shift-work patterns, baseline predictive modelling, and model evaluation.
 
-> **Data limitation:** The source dataset is described as synthetic. Results therefore describe patterns in this dataset only; they are not evidence about real nurses, patients, or clinical outcomes.
+> **Data limitation:** Findings are exploratory and describe patterns in the data used for this project. They should not be interpreted as evidence about real nurses, patients, or clinical outcomes.
 
-## Research questions
+## Research Questions
 
-1. How do sleep duration, sleep quality, and stress vary across the occupations represented in the dataset?
+1. How do sleep duration, sleep quality, and stress vary across occupational groups?
 2. What patterns are visible in records labelled `Nurse`?
 3. How do shift-work and non-shift-work records compare on selected sleep and performance variables?
-4. How well can baseline models predict the dataset's `felt_rested` label?
+4. How well can baseline models predict the `felt_rested` label?
 5. How well can a baseline model estimate `cognitive_performance_score`?
 
-These are exploratory questions. Group differences are descriptive and do not establish causation.
+These questions are exploratory. Group differences are descriptive and do not establish causation.
 
-## Quick start
-
-Python 3.10+ is recommended.
-
-```bash
-git clone https://github.com/CareerCore/nursesleep-ai.git
-cd nursesleep-ai
-
-python -m venv .venv
-# Windows:
-.venv\Scripts\activate
-# macOS/Linux:
-source .venv/bin/activate
-
-pip install -r requirements.txt
-pip install -e .
-python -m nursesleep_ai.download_data
-```
-
-Run notebooks from the repository root:
-
-```bash
-jupyter lab
-```
-
-Open the notebooks in numerical order.
-
-## Workflow
+## Project Workflow
 
 | Notebook | Purpose |
 |---|---|
-| `01_data_audit_and_eda.ipynb` | Load, validate, summarise, and visualise the dataset |
-| `02_nursing_and_shift_work.ipynb` | Explore occupation, nursing-labelled records, and shift work |
-| `03_baseline_models.ipynb` | Train and evaluate baseline classification and regression models |
+| `01_data_audit_and_eda.ipynb` | Data audit and exploratory analysis |
+| `02-group shift and analysis` | Group and shift-work analysis |
+| `3-baseline models` | Baseline model development and evaluation |
 
-## Repository layout
+## Repository Structure
 
 ```text
 nursesleep-ai/
-├── README.md
+├── 01_data_audit_and_eda.ipynb
+├── 02-group shift and analysis
+├── 3-baseline models
 ├── LICENSE
 ├── .gitignore
-├── requirements.txt
-├── pyproject.toml
-├── data/
-│   └── README.md
-├── docs/
-│   ├── methodology.md
-│   └── limitations.md
-├── notebooks/
-│   ├── 01_data_audit_and_eda.ipynb
-│   ├── 02_nursing_and_shift_work.ipynb
-│   └── 03_baseline_models.ipynb
-├── src/
-│   └── nursesleep_ai/
-│       ├── __init__.py
-│       ├── config.py
-│       ├── download_data.py
-│       ├── data.py
-│       ├── analysis.py
-│       └── modeling.py
+├── README.md
 └── results/
     ├── figures/
-    ├── tables/
-    └── metrics/
+    │   └── felt_rested_metrics_bar.png
+    ├── metrics/
+    │   └── felt_rested_random_forest (1).csv
+    └── tables/
+        └── model_performance_summary (1).csv
 ```
+
+## Model Results
+
+### Random Forest Classifier
+
+**Prediction target:** `felt_rested`
+
+| Evaluation Metric | Score |
+|---|---:|
+| Accuracy | 0.73885 |
+| Precision | 0.735263 |
+| Recall | 0.73885 |
+| F1 Score | 0.735472 |
+
+### Performance Visualization
+
+![Random Forest Performance](results/figures/felt_rested_metrics_bar.png)
+
+### Results Files
+
+- [Model evaluation metrics](results/metrics/)
+- [Performance summary table](results/tables/)
+- [Performance figure](results/figures/)
 
 ## Methods
 
-- Data validation: dimensions, data types, missingness, duplicate rows, and category counts.
-- Exploratory analysis: distributions, descriptive summaries, and group comparisons.
-- Classification: a scikit-learn preprocessing pipeline and Random Forest baseline for `felt_rested`.
-- Regression: a preprocessing pipeline and Random Forest baseline for `cognitive_performance_score`.
-- Evaluation: held-out test metrics; no performance values are claimed in advance.
+- Data validation and quality checks.
+- Exploratory data analysis and descriptive summaries.
+- Occupational and shift-work comparisons.
+- Random Forest classification for `felt_rested`.
+- Evaluation using accuracy, precision, recall, and F1 score.
 
-The modelling code excludes identifiers and all designated outcome columns from predictors by default. Review the feature set and the meaning/timing of each variable before interpreting a model. If records are repeated for the same individual, use a person-level grouped split rather than a random row split.
+Further validation is required before interpreting model performance or applying findings beyond this dataset.
 
 ## Reproducibility
 
-- Fixed random seeds are used for baseline splits and models.
-- Data is downloaded from the source URL at runtime.
-- Generated tables, figures, and metrics are saved under `results/`.
-- No result is hard-coded. Run the notebooks to generate project outputs.
+The analysis notebooks are provided in this repository. Raw dataset files are not included. An authorised input file is required to reproduce the analysis.
 
-## Responsible use
+## Responsible Use
 
-This repository is an educational and exploratory data-science project. It is **not** a clinical decision-support system, diagnostic tool, fitness-for-duty assessment, or employment-screening tool. Synthetic data cannot establish clinical validity or representativeness. Any future real-world research would require appropriate data governance, ethics review, privacy protection, and independent validation.
+This project is intended for educational and exploratory data-science purposes. It is not a clinical decision-support system, diagnostic tool, fitness-for-duty assessment, or employment-screening tool.
 
-## Licence and attribution
+Results should not be used to make medical or employment decisions.
 
-The original code in this repository is released under the MIT License. This does not change the licence or terms governing the external dataset. See `data/README.md` and the dataset source for dataset-specific terms.
+## Licence
 
-## Project status
+See the `LICENSE` file for licensing information.
 
-**Status: Initial reproducible workflow.** Results should be added only after running the notebooks and checking the outputs.
+---
 
+**NurseSleep AI — Data Analysis and Machine Learning Project**
