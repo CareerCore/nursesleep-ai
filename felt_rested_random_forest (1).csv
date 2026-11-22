@@ -1,0 +1,2 @@
+model,target,accuracy,precision,recall,f1_score
+Random Forest Classifier,felt_rested,0.73885,0.735263,0.73885,0.735472
